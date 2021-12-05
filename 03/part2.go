@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -10,13 +9,9 @@ func part2(data string) int64 {
 	binaries := strings.Split(data, "\n")
 	oxygenBinaries := searchBinariesFor("most", binaries)
 	co2Binaries := searchBinariesFor("least", binaries)
-	fmt.Println("oxygenBinaries:", oxygenBinaries)
-	fmt.Println("co2Binaries:", co2Binaries)
 
 	oxygen, _ := strconv.ParseInt(oxygenBinaries[0], 2, 64)
 	co2, _ := strconv.ParseInt(co2Binaries[0], 2, 64)
-	fmt.Println("oxygen:", oxygen)
-	fmt.Println("co2:", co2)
 	return co2 * oxygen
 }
 
