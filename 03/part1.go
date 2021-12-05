@@ -16,18 +16,18 @@ func part1(data string) int64 {
 		}
 	}
 
-	var gamma_bits string
-	var epsilon_bits string
+	var gammaBits string
+	var epsilonBits string
 	for _, count := range counts {
 		if count > len(binaries)-count {
-			gamma_bits += "1"
-			epsilon_bits += "0"
+			gammaBits += "1"
+			epsilonBits += "0"
 		} else {
-			gamma_bits += "0"
-			epsilon_bits += "1"
+			gammaBits += "0"
+			epsilonBits += "1"
 		}
 	}
-	gamma_int, _ := strconv.ParseInt(gamma_bits, 2, len(gamma_bits)+1)
-	epsilon_int, _ := strconv.ParseInt(epsilon_bits, 2, len(epsilon_bits)+1)
-	return gamma_int * epsilon_int
+	gammaInt, _ := strconv.ParseInt(gammaBits, 2, len(gammaBits)+1)
+	epsilonInt, _ := strconv.ParseInt(epsilonBits, 2, len(epsilonBits)+1)
+	return gammaInt * epsilonInt
 }
