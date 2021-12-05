@@ -1,33 +1,40 @@
 package main
 
 import (
-	"strconv"
+	"fmt"
 	"strings"
 )
 
-func part2(data string) int64 {
+func part2(data string) int {
 	binaries := strings.Split(data, "\n")
-	counts := make([]int, len(binaries[0]))
+	current_binaries := binaries
+
+	for i := 0; i < len(binaries[0]); i++ {
+		if len(current_binaries) == 1 {
+			break
+		}
+		current_binaries = findRemainingBinaries(current_binaries, i)
+	}
+
+	fmt.Println("current_binaries:", current_binaries)
+	return 0
+}
+
+func findRemainingBinaries(binaries []string, cursor int) []string {
+	var zero_binaries_at_cursor []string
+	var one_binaries_at_cursor []string
 
 	for _, binary := range binaries {
-		for i, bit := range binary {
-			num := int(bit - '0')
-			counts[i] += num
+		if string(binary[cursor]) == "1" {
+			one_binaries_at_cursor = append(one_binaries_at_cursor, binary)
+		} else {
+			zero_binaries_at_cursor = append(zero_binaries_at_cursor, binary)
 		}
 	}
 
-	var gamma_bits string
-	var epsilon_bits string
-	for _, count := range counts {
-		if count > len(binaries)-count {
-			gamma_bits += "1"
-			epsilon_bits += "0"
-		} else {
-			gamma_bits += "0"
-			epsilon_bits += "1"
-		}
+	if len(one_binaries_at_cursor) < len(zero_binaries_at_cursor) {
+		return zero_binaries_at_cursor
+	} else {
+		return one_binaries_at_cursor
 	}
-	gamma_int, _ := strconv.ParseInt(gamma_bits, 2, len(gamma_bits)+1)
-	epsilon_int, _ := strconv.ParseInt(epsilon_bits, 2, len(epsilon_bits)+1)
-	return gamma_int * epsilon_int
 }
