@@ -15,8 +15,8 @@ func readFile(path string) string {
 }
 
 func main() {
-	data := readFile("sample.txt")
+	data := readFile("data.txt")
 	fmt.Println("part 1 solution:", part1(data))
 	fmt.Println("-------------")
-	fmt.Println(part2(data))
+	fmt.Println("part 2 solution:", part2(data))
 }
